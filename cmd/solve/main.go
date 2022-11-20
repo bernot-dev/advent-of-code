@@ -1,16 +1,13 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"io"
 	"log"
-	"net/http"
-	"net/http/cookiejar"
 	"os"
-	"strings"
 	"time"
 
+	"github.com/bernot-dev/advent-of-code/internal/aoc"
 	"github.com/bernot-dev/advent-of-code/internal/puzzle"
 	"github.com/bernot-dev/advent-of-code/internal/solver"
 	flag "github.com/spf13/pflag"
@@ -53,10 +50,10 @@ func input(year, day int) (io.ReadCloser, error) {
 	}
 
 	if !inputFileExists {
-		log.Printf("Input file does not exist locally, getting from AOC: %q\n", inputURL(year, day))
+		log.Printf("Input file does not exist locally, getting from AOC\n")
 
 		// Get input from web
-		aocReader, err := inputAOC(year, day)
+		aocReader, err := aoc.Input(year, day)
 		if err != nil {
 			return nil, err
 		}
@@ -77,53 +74,6 @@ func input(year, day int) (io.ReadCloser, error) {
 	return f, nil
 }
 
-func inputAOC(year, day int) (io.ReadCloser, error) {
-	session, err := os.ReadFile("aoc-session")
-	if err != nil {
-		return nil, err
-	}
-
-	sessionCookie := http.Cookie{
-		Name:  "session",
-		Value: strings.TrimSpace(string(session)),
-
-		Path:    "/",
-		Domain:  "adventofcode.com",
-		Expires: time.Now().Add(time.Hour),
-
-		MaxAge:   0,
-		Secure:   true,
-		HttpOnly: false,
-	}
-
-	jar, err := cookiejar.New(nil)
-	if err != nil {
-		return nil, err
-	}
-	client := http.Client{
-		Jar: jar,
-	}
-
-	req, err := http.NewRequest(http.MethodGet, inputURL(year, day), nil)
-	if err != nil {
-		return nil, err
-	}
-	req.AddCookie(&sessionCookie)
-
-	resp, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	if resp.StatusCode != http.StatusOK {
-		errorText, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return nil, err
-		}
-		return nil, errors.New(string(errorText))
-	}
-	return resp.Body, nil
-}
-
 func inputFile(year, day int) (io.ReadCloser, error) {
 	f, err := os.Open(inputFilename(year, day))
 	if err != nil {
@@ -138,8 +88,4 @@ func puzzleRef(year, day, part int) string {
 
 func inputFilename(year, day int) string {
 	return fmt.Sprintf("input/%d-%02d.txt", year, day)
-}
-
-func inputURL(year, day int) string {
-	return fmt.Sprintf("https://adventofcode.com/%d/day/%d/input", year, day)
 }

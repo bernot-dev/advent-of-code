@@ -1,8 +1,6 @@
 package y2015d01
 
 import (
-	"fmt"
-
 	"github.com/bernot-dev/advent-of-code/internal/puzzle"
 	"github.com/bernot-dev/advent-of-code/internal/solver"
 )
@@ -18,6 +16,5 @@ func register(part int, fn solver.Solver) {
 		Day:  day,
 		Part: part,
 	}
-	fmt.Printf("register %+v", ref)
 	solver.Register(ref, fn)
 }
