@@ -6,7 +6,7 @@ import (
 	_ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d02"
 	_ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d03"
 	_ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d04"
-	// _ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d05"
+	_ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d05"
 	// _ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d06"
 	// _ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d07"
 	// _ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d08"
