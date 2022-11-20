@@ -1,4 +1,4 @@
-package y{YEAR}d{DAY}
+package y2015d03
 
 import (
 	"github.com/bernot-dev/advent-of-code/internal/puzzle"
@@ -6,8 +6,8 @@ import (
 )
 
 const (
-	year = {YEAR}
-	day  = {DAY}
+	year = 2015
+	day  = 03
 )
 
 func register(part int, fn solver.Solver) {
