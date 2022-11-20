@@ -1,4 +1,4 @@
-package y{YEAR}d{DAY}
+package y{YEAR}d{LPADDAY}
 
 import (
 	"github.com/bernot-dev/advent-of-code/internal/puzzle"
