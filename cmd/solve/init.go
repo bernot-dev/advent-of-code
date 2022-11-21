@@ -8,7 +8,7 @@ import (
 	_ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d04"
 	_ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d05"
 	_ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d06"
-	// _ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d07"
+	_ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d07"
 	// _ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d08"
 	// _ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d09"
 	// _ "github.com/bernot-dev/advent-of-code/internal/puzzle/y2015d10"
