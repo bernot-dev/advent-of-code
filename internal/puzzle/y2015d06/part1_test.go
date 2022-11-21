@@ -2,19 +2,35 @@ package y2015d06
 
 import "testing"
 
-func TestPart1(t *testing.T) {
-	type test struct {
-		input any
-		want  any
+func TestParseInstruction(t *testing.T) {
+	tests := map[string]instruction{
+		"toggle 461,550 through 564,900": {
+			op: "toggle",
+			a:  coordinate{461, 550},
+			b:  coordinate{564, 900},
+		},
 	}
+	for tc, want := range tests {
+		t.Run(tc, func(t *testing.T) {
+			got := parseInstruction(tc)
+			if got != want {
+				t.Errorf("got: %+v\nwant: %+v", got, want)
+			}
+		})
+	}
+}
 
-	tests := map[string]test{}
-
-	for name, tc := range tests {
-		t.Run(name, func(t *testing.T) {
-			got := part1(tc.input)
-			if got != tc.want {
-				t.Errorf("want %v, got %v", tc.want, got)
+func TestApplyRange(t *testing.T) {
+	tests := map[instruction]int{
+		instruction{"turn on", coordinate{0, 0}, coordinate{999, 999}}: 1000000,
+	}
+	for tc, want := range tests {
+		t.Run(tc.String(), func(t *testing.T) {
+			g := make(grid)
+			g.applyRange(tc.op, tc.a, tc.b)
+			got := g.len()
+			if got != want {
+				t.Errorf("got %d, want %d", got, want)
 			}
 		})
 	}
